@@ -12,7 +12,7 @@ const CoursesPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:7000/courses');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/courses`);
         if (response.status === 401) {
           navigate('/login');
         } else {
@@ -41,11 +41,11 @@ const CoursesPage = () => {
   }, [navigate]);
 
 
-  const serverUrl = 'http://localhost:7000';
+  const serverUrl = process.env.REACT_APP_BACKEND_URL;
 
   const fetchEducatorName = async (educatorId) => {
     try {
-      const response = await axios.get(`http://localhost:7000/educator/${educatorId}/profile`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/educator/${educatorId}/profile`);
       return response.data.username;
     } catch (error) {
       console.error('Error fetching educator name:', error);

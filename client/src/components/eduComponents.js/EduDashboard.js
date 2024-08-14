@@ -15,7 +15,7 @@ const EduDashboard = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get(`http://localhost:7000/educator/${id}/dashboard`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/educator/${id}/dashboard`);
         setCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);

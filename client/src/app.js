@@ -18,6 +18,9 @@ import CourseDetails from "./pages/CourseDetails";
 import Authenticate from "./components/authenticate";
 import { ChakraProvider } from "@chakra-ui/react";
 import EduPage from "./routes/eduRoutes";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 
 // const root = ReactDom.createRoot(document.getElementById('root'));

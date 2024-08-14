@@ -2,6 +2,7 @@ import React from 'react';
 import LandingBody from '../components/LandingBody';
 
 const LandingPage = () => {
+  console.log(process.env.REACT_APP_BACKEND_URL)
   return (
     <div className="landing-page h-[557px] flex flex-col justify-between">
       <LandingBody />

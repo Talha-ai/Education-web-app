@@ -2,7 +2,7 @@ import React from 'react';
 
 const CourseDetails = ({ course }) => {
   console.log(course)
-  const serverUrl = 'http://localhost:7000';
+  const serverUrl = process.env.REACT_APP_BACKEND_URL;
   return (
     <div className=''>
       <div className='flex w-full h-full gap-10 justify-center items-center flex-wrap'>

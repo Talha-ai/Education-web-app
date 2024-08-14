@@ -30,7 +30,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:7000/auth/login', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(credentials),

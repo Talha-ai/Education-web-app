@@ -74,7 +74,7 @@ const UploadCourse = () => {
     // }
 
 
-    axios.post('http://localhost:7000/upload/create', formData)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/upload/create`, formData)
       .then(res => {
         navigate(`/educator/${id}/dashboard`)
       })
