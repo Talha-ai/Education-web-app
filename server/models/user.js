@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
   username: {
@@ -25,16 +24,7 @@ const userSchema = new Schema({
   }
 });
 
-// userSchema.pre('remove', async function (next) {
-//   try {
-//     await Task.deleteMany({ user: this._id });
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 
-userSchema.plugin(passportLocalMongoose); //unique other methods
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

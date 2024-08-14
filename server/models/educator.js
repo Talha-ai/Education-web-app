@@ -6,6 +6,14 @@ const educatorSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  username: {
+    type: String,
+    required: true,
+  },
+  experience: {
+    type: Number,
+    required: true
+  },
 });
 
 const Educator = mongoose.model('Educator', educatorSchema);
