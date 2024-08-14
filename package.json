@@ -5,7 +5,7 @@
     "start": "node server",
     "dev": "nodemon index",
     "parcel": "npx parcel ./client/public/index.html",
-    "build": "parcel build index.html",
+    "build": "parcel build ./client/public/index.html",
     "dev:start": "concurrently \"npm run dev\" \"npm run parcel\"",
     "test": "jest"
   },
