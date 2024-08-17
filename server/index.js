@@ -8,8 +8,9 @@ const session = require('express-session'); //middleware to manage user sessions
 // const LocalStrategy = require('passport-local'); //local strategy for passport, commonly used for username and password auth
 // const flash = require('connect-flash')
 const connectDB = require('./config/connectDB');
+const dotenv = require("dotenv")
 const cors = require('cors');
-
+dotenv.config();
 connectDB();
 
 const app = express();
