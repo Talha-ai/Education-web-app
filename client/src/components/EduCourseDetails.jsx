@@ -51,7 +51,7 @@ const EducatorCourseDetails = ({ courses }) => {
           >
             <img
               className="rounded-t-md w-full h-40 object-cover"
-              src={`http://${import.meta.env.VITE_BACKEND_URL}/images/${course.image}`}
+              src={`${import.meta.env.VITE_BACKEND_URL}/images/${course.image}`}
               alt={course.title}
             />
             <div className="p-3 flex flex-col gap-2">
