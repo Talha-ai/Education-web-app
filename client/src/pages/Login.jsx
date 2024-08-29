@@ -47,7 +47,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
         const redirectPath = localStorage.getItem('redirectPath') || '/';
         localStorage.removeItem('redirectPath');
 
-        // Call the login function from AuthContext with user data
+        // Call the login function from AuthContext with xuser data
         login({ ...data, userType: credentials.role, authUser: data.authUser });
 
         toast({

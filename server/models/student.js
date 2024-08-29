@@ -22,6 +22,10 @@ const studentSchema = new Schema({
     type: Number,
     required: true
   },
+  enrolledCourses: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Course'
+  }]
 });
 
 const Student = mongoose.model('Student', studentSchema);

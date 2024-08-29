@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-
+const Student = require('../models/student')
 const User = require('../models/user');
-// const { isLoggedIn } = require('../middlewares/auth');
+const mongoose = require('mongoose'); //an ODM(object data modeling) library for MongoDB and node.js
 
 router.get('/getUserInfo', async (req, res) => {
   try {
@@ -26,5 +26,27 @@ router.get('/getUserInfo', async (req, res) => {
   }
 });
 
+
+router.get('/enrolled-courses/:userId', async (req, res) => {
+
+  const { userId } = req.params;
+  console.log(userId)
+
+  const objectIdUserId = new mongoose.Types.ObjectId(userId);
+
+  try {
+    const student = await Student.findOne({ user: objectIdUserId }).populate('enrolledCourses');
+    if (!student) {
+      return res.status(404).json({ success: false, message: 'Student not found' });
+    }
+
+    console.log(student)
+
+    res.status(200).json({ success: true, courses: student.enrolledCourses });
+  } catch (error) {
+    console.error('Error fetching enrolled courses:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
 
 module.exports = router;

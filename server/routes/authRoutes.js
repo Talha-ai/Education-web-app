@@ -13,7 +13,6 @@ router.post('/signup', async (req, res) => {
   try {
     const hash = await bcrypt.hash(password, 12);
 
-    // Create a new user instance
     const user = new User({
       username,
       email,
@@ -21,10 +20,8 @@ router.post('/signup', async (req, res) => {
       role,
     });
 
-    // Save the user
     await user.save();
 
-    // Check the user's role and save additional data accordingly
     if (role === 'educator') {
       const educator = new Educator({
         user: user._id,
@@ -32,7 +29,6 @@ router.post('/signup', async (req, res) => {
         experience,
       });
 
-      // Save the educator data
       await educator.save();
     } else if (role === 'student') {
       const student = new Student({
@@ -46,9 +42,6 @@ router.post('/signup', async (req, res) => {
 
       await student.save();
     }
-
-    // Create a JWT token
-    // const token = jwt.sign({ user_id: user._id, username: user.username }, 'secret-key', { expiresIn: '24h' });
 
     res.status(201).json({ success: true, message: 'User registration successful.' });
 

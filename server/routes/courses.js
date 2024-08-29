@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Course = require('../models/course'); // Import your Course model
+const Course = require('../models/course');
+const Student = require('../models/student');
+const User = require('../models/user');
+const mongoose = require('mongoose'); //an ODM(object data modeling) library for MongoDB and node.js
 
 router.get('/courses', async (req, res) => {
   try {
@@ -29,29 +32,39 @@ router.get('/courses/:id', async (req, res) => {
   }
 });
 
-const deleteMeal = async (req, res) => {
-  const { mealid } = req.params;
-  try {
-    // Find the meal to get the chefId
-    const meal = await mealsModel.findById(mealid);
 
-    if (!meal) {
-      return res.status(404).json({ error: "Meal not found" });
+router.post('/enroll/:courseId/:userId', async (req, res) => {
+  const { courseId } = req.params;
+  const { userId } = req.params;
+
+  console.log(courseId, userId)
+
+  try {
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res.status(404).json({ success: false, message: 'Course not found' });
     }
 
-    // Delete the meal
-    await mealsModel.findByIdAndDelete(mealid);
+    const objectIdUserId = new mongoose.Types.ObjectId(userId);
 
-    // Remove the meal from the chef's meals array
-    await chefModel.findByIdAndUpdate(meal.chefName, {
-      $pull: { meals: mealid },
-    });
+    const stu = await Student.findOne({ user: objectIdUserId });
+    if (!stu) {
+      return res.status(404).json({ success: false, message: 'Student not found' });
+    }
 
-    res.status(200).send("deleted");
+    if (stu.enrolledCourses.includes(courseId)) {
+      return res.status(400).json({ success: false, message: 'Already enrolled in this course' });
+    }
+
+    stu.enrolledCourses.push(courseId);
+    await stu.save();
+
+    res.status(200).json({ success: true, message: 'Enrolled successfully' });
   } catch (error) {
-    res.status(500).json(error);
+    console.error('Error enrolling in course:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
-};
+});
 
 
 module.exports = router;

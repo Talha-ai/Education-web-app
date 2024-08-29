@@ -21,9 +21,8 @@ const userSchema = new Schema({
     type: String,
     enum: ['student', 'educator'],
     default: 'student',
-  }
+  },
 });
-
 
 const User = mongoose.model('User', userSchema);
 

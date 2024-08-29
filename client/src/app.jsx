@@ -21,10 +21,12 @@ import { AuthProvider } from './utils/authContext';
 import CourseDetails from './pages/CourseDetails';
 import Authenticate from './components/authenticate';
 import { ChakraProvider } from '@chakra-ui/react';
+import axios from 'axios';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+
   return (
     <ChakraProvider>
       <AuthProvider>
